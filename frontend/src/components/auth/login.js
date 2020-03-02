@@ -3,13 +3,23 @@ import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import { toastr } from 'react-redux-toastr';
-import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionLogMeIn } from './actions/actionAuthenticate';
 import Header from '../common/Header';
-import Avatar from '@material-ui/core/Avatar';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { withStyles } from '@material-ui/core/styles';
+import LockIcon from '../common/LockIcon';
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
+
+const styles = {
+  signInBtn: {
+    background: '#1976d2',
+    marginBottom: '1em'
+  },
+  signUpBtn: {
+    background: '#1976d2'
+  }
+};
 
 class Login extends Component {
   constructor(props) {
@@ -28,8 +38,7 @@ class Login extends Component {
   };
 
   logMeIn = () => {
-    const email = this.state.email;
-    const password = this.state.password;
+    const { email, password } = this.state;
     const data = {
       email,
       password
@@ -56,17 +65,12 @@ class Login extends Component {
   };
 
   render() {
+    const { email, password } = this.state;
+    const { classes } = this.props;
     return (
       <>
         <Header {...this.props} />
-        <Avatar
-          style={{
-            backgroundColor: 'rgb(220, 0, 78)',
-            margin: '10em auto -7em auto',
-            padding: '1.2em'
-          }}>
-          <LockOutlinedIcon />
-        </Avatar>
+        <LockIcon />
 
         <Card className="add-campground-card">
           <TextField
@@ -76,7 +80,7 @@ class Login extends Component {
             className="textfield"
             label="E-Mail"
             variant="outlined"
-            value={this.state.email}
+            value={email}
             onChange={e => this.handleChange(e)}
           />
           <TextField
@@ -86,21 +90,23 @@ class Login extends Component {
             className="textfield"
             label="Password"
             variant="outlined"
-            value={this.state.password}
+            value={password}
             onChange={e => this.handleChange(e)}
           />
           <Button
             variant="contained"
-            style={{ background: '#1976d2', marginBottom: '1em' }}
+            className={classes.signInBtn}
             color="primary"
-            onClick={this.logMeIn}>
+            onClick={this.logMeIn}
+          >
             Sign In
           </Button>
           <Button
+            className={classes.signUpBtn}
             variant="contained"
-            style={{ background: '#1976d2' }}
             color="primary"
-            onClick={this.signUp}>
+            onClick={this.signUp}
+          >
             Don't have an account? Click to Sign Up
           </Button>
         </Card>
@@ -127,4 +133,4 @@ const mapDispatchToprops = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToprops
-)(Login);
+)(withStyles(styles)(Login));
