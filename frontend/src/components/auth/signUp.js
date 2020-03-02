@@ -6,9 +6,8 @@ import { toastr } from 'react-redux-toastr';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionSignMeUp } from './actions/actionAuthenticate';
-import Avatar from '@material-ui/core/Avatar';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Header from '../common/Header';
+import LockIcon from '../common/LockIcon';
 
 class SignUp extends Component {
   constructor(props) {
@@ -78,15 +77,7 @@ class SignUp extends Component {
       <>
         <Header {...this.props} />
 
-        <Avatar
-          style={{
-            backgroundColor: 'rgb(220, 0, 78)',
-            margin: '10em auto -7em auto',
-            padding: '1.2em'
-          }}
-        >
-          <LockOutlinedIcon />
-        </Avatar>
+        <LockIcon />
         <Card className="add-campground-card">
           <TextField
             autoComplete="off"
