@@ -2,12 +2,10 @@ import { SIGN_UP, LOGIN } from '../types/types';
 
 import axios from 'axios';
 
-import { BASE_URL } from '../../../environment';
-
 export const actionSignMeUp = user => {
   return dispatch => {
     return axios
-      .post(`${BASE_URL}/users/signup`, user)
+      .post(`${process.env.REACT_APP_API_URL}/users/signup`, user)
       .then(res => {
         dispatch({
           type: SIGN_UP,
@@ -22,7 +20,7 @@ export const actionSignMeUp = user => {
 export const actionLogMeIn = user => {
   return dispatch => {
     return axios
-      .post(`${BASE_URL}/users/login`, user)
+      .post(`${process.env.REACT_APP_API_URL}/users/login`, user)
       .then(res => {
         dispatch({
           type: LOGIN,
