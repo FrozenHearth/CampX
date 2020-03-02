@@ -1,0 +1,29 @@
+.campground-details-card {
+  /* height: 500px; */
+  margin: 4em 0 10em 20em;
+  width: 70%;
+}
+
+.edit-campground-btn,
+.delete-campground-btn {
+  color: white !important;
+  outline: 0 !important;
+  padding: 0.7em 3em !important;
+  margin: 1.5em 0 2em 0 !important;
+}
+
+.delete-campground-btn {
+  margin-left: 1em !important;
+}
+
+.payment-btn {
+  color: white !important;
+  outline: 0 !important;
+  padding: 0.7em 3em !important;
+  margin-top: 1em !important;
+  background: #168afa !important;
+}
+
+.edit-campground-btn {
+  background: #4caf50 !important;
+}

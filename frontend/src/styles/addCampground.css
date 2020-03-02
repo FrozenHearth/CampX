@@ -1,0 +1,40 @@
+.add-campground-card {
+  padding: 1.5em;
+  width: 500px;
+  margin: 10em auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: space-between;
+  /* float: left; */
+}
+
+.add-campground-card .textfield {
+  margin-bottom: 1em;
+}
+
+.update-campground-btn {
+  background: #43a047 !important;
+  width: 100% !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* .delete-campground-btn 
+  outline: 0 !important;
+  border-radius: 0 !important;
+  float: left !important;
+} */
+
+.add-campground,
+.upload-campground-image-btn {
+  padding: 1em 2em !important;
+  margin-top: 1em !important;
+  outline: 0 !important;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

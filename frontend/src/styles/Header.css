@@ -1,0 +1,58 @@
+.nav-item-styled {
+  text-decoration: none;
+}
+
+.nav-item-login {
+  color: rgb(216, 216, 216);
+  font-size: 1.1em;
+}
+
+.nav-item-login:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.nav-item-signup {
+  color: rgb(216, 216, 216);
+  font-size: 1.1em;
+}
+
+.nav-item-signup:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.brand-name,
+.home-page-btn {
+  color: white !important;
+  outline: 0 !important;
+  text-transform: capitalize !important;
+}
+
+.brand-name {
+  font-size: 1em !important;
+}
+
+.home-page-btn {
+  font-size: 0.8em !important;
+  margin-left: 1em !important;
+}
+
+.brand-name:hover,
+.home-page-btn:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.login-btn {
+  outline: 0 !important;
+  margin-left: auto !important;
+}
+
+.navbar-container {
+  background: grey !important;
+}
+
+.welcome-msg {
+  margin-left: auto !important;
+}
