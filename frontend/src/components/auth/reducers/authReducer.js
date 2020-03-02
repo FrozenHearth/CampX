@@ -1,4 +1,4 @@
-import { SIGN_UP, LOGIN, IS_AUTHENTICATED } from '../types/types';
+import { SIGN_UP, LOGIN } from '../types/authTypes';
 
 const initialState = {
   user: {},
@@ -16,8 +16,6 @@ export default (state = initialState, action) => {
       state.loggedInUser = loggedInUser;
       state.token = token;
       return { ...state };
-    case IS_AUTHENTICATED:
-      return { ...state, authenticated: true };
     default:
       return state;
   }

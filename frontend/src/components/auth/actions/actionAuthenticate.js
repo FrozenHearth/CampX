@@ -1,4 +1,4 @@
-import { SIGN_UP, LOGIN } from '../types/types';
+import { SIGN_UP, LOGIN } from '../types/authTypes';
 
 import axios from 'axios';
 
