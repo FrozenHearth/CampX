@@ -7,14 +7,16 @@ import {
 import axios from 'axios';
 import { authHeader } from '../../../helpers/auth-header';
 
-const API_URL = `http://localhost:5000/api`;
-
 export const actionMakePayment = data => {
   return async dispatch => {
     try {
-      const res = await axios.post(`${API_URL}/payment`, data, {
-        headers: authHeader()
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL}/payment`,
+        data,
+        {
+          headers: authHeader()
+        }
+      );
       dispatch({
         type: MAKE_PAYMENT,
         payload: res
@@ -29,9 +31,13 @@ export const actionMakePayment = data => {
 export const actionPaymentSuccess = data => {
   return async dispatch => {
     try {
-      const res = await axios.post(`${API_URL}/payment/success`, data, {
-        headers: authHeader()
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL}/payment/success`,
+        data,
+        {
+          headers: authHeader()
+        }
+      );
       dispatch({
         type: PAYMENT_SUCCESS,
         payload: res
@@ -46,9 +52,12 @@ export const actionPaymentSuccess = data => {
 export const actionGetPaymentStatus = id => {
   return async dispatch => {
     try {
-      const res = await axios.get(`${API_URL}/payment/${id}`, {
-        headers: authHeader()
-      });
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL}/payment/${id}`,
+        {
+          headers: authHeader()
+        }
+      );
       dispatch({
         type: PAYMENT_STATUS,
         payload: res
