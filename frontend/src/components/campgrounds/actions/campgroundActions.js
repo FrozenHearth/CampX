@@ -9,12 +9,12 @@ import {
 import axios from 'axios';
 import { authHeader } from '../../../helpers/auth-header';
 
-const API_URL = `http://localhost:5000/api`;
-
 export const actionGetAllCampgrounds = () => {
   return async dispatch => {
     try {
-      const res = await axios.get(`${API_URL}/campgrounds`);
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL}/campgrounds`
+      );
       dispatch({
         type: GET_ALL_CAMPGROUNDS,
         payload: res
@@ -29,9 +29,13 @@ export const actionGetAllCampgrounds = () => {
 export const actionAddCampground = campground => {
   return async dispatch => {
     try {
-      const res = await axios.post(`${API_URL}/campgrounds`, campground, {
-        headers: authHeader()
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL}/campgrounds`,
+        campground,
+        {
+          headers: authHeader()
+        }
+      );
       dispatch({
         type: ADD_CAMPGROUND,
         payload: res
@@ -46,9 +50,12 @@ export const actionAddCampground = campground => {
 export const getCampgroundDetails = id => {
   return async dispatch => {
     try {
-      const res = await axios.get(`${API_URL}/campgrounds/${id}`, {
-        headers: authHeader()
-      });
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL}/campgrounds/${id}`,
+        {
+          headers: authHeader()
+        }
+      );
       dispatch({
         type: GET_CAMPGROUND_DETAILS,
         payload: res
@@ -64,7 +71,7 @@ export const actionUpdateCampground = campground => {
   return async dispatch => {
     try {
       const res = await axios.put(
-        `${API_URL}/campgrounds/${campground.id}`,
+        `${process.env.REACT_APP_API_URL}/campgrounds/${campground.id}`,
         campground,
         {
           headers: authHeader()
@@ -84,9 +91,12 @@ export const actionUpdateCampground = campground => {
 export const actionDeleteCampground = id => {
   return async dispatch => {
     try {
-      const res = await axios.delete(`${API_URL}/campgrounds/${id}`, {
-        headers: authHeader()
-      });
+      const res = await axios.delete(
+        `${process.env.REACT_APP_API_URL}/campgrounds/${id}`,
+        {
+          headers: authHeader()
+        }
+      );
       dispatch({
         type: DELETE_CAMPGROUND,
         payload: res

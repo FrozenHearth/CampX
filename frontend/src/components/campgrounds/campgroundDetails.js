@@ -36,41 +36,32 @@ class CampgroundDetails extends Component {
       paidUserFirstName: ''
     };
   }
-  componentDidMount() {
-    const user = JSON.parse(localStorage.getItem('user'));
-    const token = localStorage.getItem('token');
-    if (token) {
-      this.setState({
-        token: token
-      });
-    }
-    if (user) {
-      delete user.password;
-      this.setState({
-        loggedInUser: user
-      });
-    }
+
+  getCampgroundDetails = () => {
+    const { id } = this.props.match.params;
     this.props
-      .getCampgroundDetails(this.props.match.params.id)
+      .getCampgroundDetails(id)
       .then(() => {
-        const campgroundId = this.props.match.params.id;
+        const campgroundId = id;
 
         this.props
           .actionGetPaymentStatus(campgroundId)
           .then(res => {
             if (res.paymentDetails && res.paymentDetails.status === 1) {
+              const { campgroundId } = res.paymentDetails;
+              const { userId, firstName } = res.paymentDetails._owner;
               this.setState({
-                paidCampgroundId: res.paymentDetails.campgroundId,
-                paidUserId: res.paymentDetails._owner.userId,
+                paidCampgroundId: campgroundId,
+                paidUserId: userId,
                 paidAuthorId: res.paymentDetails._author.userId,
-                paidUserFirstName: res.paymentDetails._owner.firstName
+                paidUserFirstName: firstName
               });
             }
           })
           .catch(err => console.log(err));
       })
       .catch(err => console.log(err));
-  }
+  };
 
   navigate = () => {
     const id = this.props.campground._id;
@@ -115,9 +106,12 @@ class CampgroundDetails extends Component {
           description: `Payment for ${title} `,
           order_id: res.order.id,
           handler: response => {
-            const razorpay_payment_id = response.razorpay_payment_id;
-            const razorpay_order_id = response.razorpay_order_id;
-            const razorpay_signature = response.razorpay_signature;
+            const {
+              razorpay_payment_id,
+              razorpay_order_id,
+              razorpay_signature
+            } = response;
+
             this.props
               .actionPaymentSuccess({
                 razorpay_payment_id,
@@ -156,6 +150,23 @@ class CampgroundDetails extends Component {
       .catch(err => console.log(err));
   };
 
+  componentDidMount() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.setState({
+        token: token
+      });
+    }
+    if (user) {
+      delete user.password;
+      this.setState({
+        loggedInUser: user
+      });
+    }
+    this.getCampgroundDetails();
+  }
+
   render() {
     const { campground } = this.props || '';
     const campgroundId = this.props.match.params.id;
@@ -166,7 +177,10 @@ class CampgroundDetails extends Component {
         {campground ? (
           <Card className="campground-details-card">
             {campground.image ? (
-              <CardMedia image={campground.image} style={{ minHeight: '700px' }} />
+              <CardMedia
+                image={campground.image}
+                style={{ minHeight: '700px' }}
+              />
             ) : (
               ''
             )}
@@ -199,7 +213,9 @@ class CampgroundDetails extends Component {
                 >
                   Submitted by {campground._author.firstName},
                   <br />
-                  {moment(campground.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
+                  {moment(campground.createdAt).format(
+                    'MMMM Do YYYY, h:mm:ss a'
+                  )}
                 </Typography>
               ) : (
                 ''

@@ -46,10 +46,7 @@ class AddCampground extends Component {
   };
 
   addCampground = () => {
-    const title = this.state.title;
-    const description = this.state.description;
-    const cost = this.state.cost;
-    const image = this.state.image;
+    const { title, description, cost, image } = this.state;
     this.props
       .actionAddCampground({
         title,
@@ -70,7 +67,8 @@ class AddCampground extends Component {
   };
 
   render() {
-    const disableBtn = this.state.disableBtn;
+    const { title, description, cost, image, disableBtn } = this.state;
+
     return (
       <>
         <Header {...this.props} />
@@ -80,7 +78,8 @@ class AddCampground extends Component {
               style={{ fontWeight: '400' }}
               className="text-center"
               variant="h6"
-              component="h6">
+              component="h6"
+            >
               Add Your Campground
             </Typography>
           </CardContent>
@@ -90,7 +89,7 @@ class AddCampground extends Component {
             className="textfield"
             label="Campground name"
             variant="outlined"
-            value={this.state.title}
+            value={title}
             onChange={e => this.handleChange(e)}
           />
           <TextField
@@ -104,7 +103,7 @@ class AddCampground extends Component {
             variant="outlined"
             rows="8"
             multiline
-            value={this.state.description}
+            value={description}
             onChange={e => this.handleChange(e)}
           />
           <TextField
@@ -115,7 +114,7 @@ class AddCampground extends Component {
             label="Cost &#8377;"
             inputProps={{ min: '0' }}
             variant="outlined"
-            value={this.state.cost}
+            value={cost}
             onChange={e => this.handleChange(e)}
           />
 
@@ -125,7 +124,7 @@ class AddCampground extends Component {
             className="textfield"
             label="Campground Image"
             variant="outlined"
-            value={this.state.image}
+            value={image}
             onChange={e => this.handleChange(e)}
           />
           <Button
@@ -133,7 +132,8 @@ class AddCampground extends Component {
             variant="contained"
             color="primary"
             disabled={disableBtn === true}
-            onClick={this.addCampground}>
+            onClick={this.addCampground}
+          >
             Add Campground
           </Button>
         </Card>
@@ -158,7 +158,4 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AddCampground);
+export default connect(mapStateToProps, mapDispatchToProps)(AddCampground);
