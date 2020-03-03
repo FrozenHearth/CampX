@@ -27,25 +27,26 @@ class EditCampground extends Component {
   }
 
   componentDidMount() {
-    const { campground } = this.props;
-    if (this.props.match.params.id) {
-      this.props.getCampgroundDetails(this.props.match.params.id);
+    const { id } = this.props.match.params;
+    const { title, description, cost, image } = this.props.campground;
+    if (id) {
+      this.props.getCampgroundDetails(id);
       this.setState({
-        title: campground.title,
-        description: campground.description,
-        cost: campground.cost,
-        image: campground.image
+        title,
+        description,
+        cost,
+        image
       });
     }
   }
 
   UNSAFE_componentWillReceiveProps(prevProps) {
-    const { campground } = prevProps;
+    const { title, description, cost, image } = prevProps.campground;
     this.setState({
-      title: campground.title,
-      description: campground.description,
-      cost: campground.cost,
-      image: campground.image
+      title,
+      description,
+      cost,
+      image
     });
   }
 
@@ -57,9 +58,7 @@ class EditCampground extends Component {
   };
 
   updateCampground = () => {
-    const title = this.state.title;
-    const description = this.state.description;
-    const cost = this.state.cost;
+    const { title, description, cost } = this.state;
     const id = this.props.campground._id;
     const data = {
       title,
@@ -77,6 +76,7 @@ class EditCampground extends Component {
   };
 
   render() {
+    const { title, description, cost, image } = this.state;
     return (
       <Card className="add-campground-card">
         <TextField
@@ -84,7 +84,7 @@ class EditCampground extends Component {
           className="textfield"
           label="Campground name"
           variant="outlined"
-          value={this.state.title || ''}
+          value={title || ''}
           onChange={e => this.handleChange(e)}
         />
         <TextField
@@ -92,7 +92,7 @@ class EditCampground extends Component {
           className="textfield"
           label="Campground description"
           variant="outlined"
-          value={this.state.description || ''}
+          value={description || ''}
           onChange={e => this.handleChange(e)}
         />
         <TextField
@@ -101,7 +101,7 @@ class EditCampground extends Component {
           type="number"
           label="Campground cost"
           variant="outlined"
-          value={this.state.cost || ''}
+          value={cost || ''}
           onChange={e => this.handleChange(e)}
         />
         <TextField
@@ -109,7 +109,7 @@ class EditCampground extends Component {
           className="textfield"
           label="Campground Image"
           variant="outlined"
-          value={this.state.image || ''}
+          value={image || ''}
           onChange={e => this.handleChange(e)}
         />
         <div className="btn-container">
@@ -117,7 +117,8 @@ class EditCampground extends Component {
             variant="contained"
             color="primary"
             className="update-campground-btn"
-            onClick={this.updateCampground}>
+            onClick={this.updateCampground}
+          >
             Update Campground
           </Button>
         </div>
@@ -143,7 +144,4 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EditCampground);
+export default connect(mapStateToProps, mapDispatchToProps)(EditCampground);

@@ -51,16 +51,20 @@ class CampgroundLanding extends Component {
     );
   }
 
+  navigateToRoute = route => {
+    this.props.history.push(route);
+  };
+
   navigateToAddCampground = () => {
-    this.props.history.push('/campgrounds/add');
+    this.navigateToRoute('/campgrounds/add');
   };
 
   navigateToSignUp = () => {
-    this.props.history.push('/signup');
+    this.navigateToRoute('/signup');
   };
 
   navigateToLogin = () => {
-    this.props.history.push('/login');
+    this.navigateToRoute('/login');
   };
 
   trunc = (string, length, delimiter) => {
@@ -75,9 +79,7 @@ class CampgroundLanding extends Component {
   render() {
     const { campgrounds } = this.props;
 
-    const user = this.state.user;
-
-    const showProgressBar = this.state.showProgressBar;
+    const { user, showProgressBar } = this.state;
 
     return (
       <>
@@ -96,7 +98,8 @@ class CampgroundLanding extends Component {
             <Typography
               className="jumbotron-header"
               variant="h3"
-              component="h6">
+              component="h6"
+            >
               Welcome to CampX!
             </Typography>
             <Typography className="jumbotron-para" variant="h6" component="p">
@@ -122,7 +125,8 @@ class CampgroundLanding extends Component {
                 className="add-campground-btn"
                 variant="outlined"
                 color="default"
-                onClick={this.navigateToAddCampground}>
+                onClick={this.navigateToAddCampground}
+              >
                 Add Campground
               </Button>
             ) : (
@@ -131,14 +135,16 @@ class CampgroundLanding extends Component {
                   className="go-to-signUp-btn"
                   variant="outlined"
                   color="default"
-                  onClick={this.navigateToSignUp}>
+                  onClick={this.navigateToSignUp}
+                >
                   Sign Up
                 </Button>
                 <Button
                   className="go-to-login-btn"
                   variant="outlined"
                   color="default"
-                  onClick={this.navigateToLogin}>
+                  onClick={this.navigateToLogin}
+                >
                   Login
                 </Button>
               </>
@@ -152,7 +158,8 @@ class CampgroundLanding extends Component {
               style={{ margin: '2em auto', fontSize: '1.2em' }}
               gutterBottom
               variant="subtitle1"
-              component="p">
+              component="p"
+            >
               Please add a campground to get started.
             </Typography>
           ) : campgrounds.length ? (
@@ -160,7 +167,8 @@ class CampgroundLanding extends Component {
               <Card
                 style={{ width: '400px' }}
                 className="campground-card"
-                key={index}>
+                key={index}
+              >
                 <CardHeader
                   subheader={moment(campground.createdAt).format('LL')}
                   title={
@@ -187,7 +195,8 @@ class CampgroundLanding extends Component {
                     style={{ fontSize: '1.3em', fontWeight: '500' }}
                     gutterBottom
                     variant="h5"
-                    component="h1">
+                    component="h1"
+                  >
                     {campground.title}
                   </Typography>
                   <Typography variant="body1" component="p">
@@ -197,7 +206,8 @@ class CampgroundLanding extends Component {
                   <Typography
                     variant="body1"
                     color="textSecondary"
-                    component="p">
+                    component="p"
+                  >
                     &#8377; {campground.cost}
                     {/* {this.trunc(campground.description, 50)} */}
                   </Typography>
@@ -209,7 +219,8 @@ class CampgroundLanding extends Component {
                       textDecoration: 'none',
                       color: 'black'
                     }}
-                    to={`/campgrounds/${campground._id}`}>
+                    to={`/campgrounds/${campground._id}`}
+                  >
                     <CardContent>
                       <Typography variant="body1" component="p">
                         View Details
@@ -245,7 +256,4 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CampgroundLanding);
+export default connect(mapStateToProps, mapDispatchToProps)(CampgroundLanding);
