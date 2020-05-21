@@ -30,11 +30,12 @@ router.get('/:id', (req, res) => {
 // Add a new campground
 
 router.post('/', checkAuth, (req, res, next) => {
+  const { title, description, cost, image } = req.body;
   const campgroundToPost = new Campground({
-    title: req.body.title,
-    description: req.body.description,
-    cost: req.body.cost,
-    image: req.body.image,
+    title,
+    description,
+    cost,
+    image,
     _author: {
       id: req.userData.userId,
       firstName: req.userData.firstName
