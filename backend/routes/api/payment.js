@@ -53,20 +53,22 @@ router.post('/success', (req, res) => {
   let generated_signature = data.digest('hex');
   //Printing the output on the console
   payment.save();
+  
+  const { razorpay_payment_id, razorpay_order_id, razorpay_signature, campgroundId, _id, status } = payment;
 
   res.status(200).json({
-    razorpay_payment_id: payment.razorpay_payment_id,
-    razorpay_order_id: payment.razorpay_order_id,
-    razorpay_signature: payment.razorpay_signature,
+    razorpay_payment_id,
+    razorpay_order_id,
+    razorpay_signature,
     userId: payment._owner.userId,
     firstName: payment._owner.firstName,
-    status: payment.status,
-    _id: payment._id,
+    status,
+    _id,
     paidOn: payment.paidOn,
     userId: payment._owner.userId,
     authorId: payment._author.userId,
     firstName: payment._owner.firstName,
-    campgroundId: payment.campgroundId
+    campgroundId
   });
 });
 
