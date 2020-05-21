@@ -4,16 +4,17 @@ module.exports = (req, res, next) => {
   try {
     const token = req.headers.authorization;
     const decodedToken = jwt.verify(token, process.env.JWT_KEY);
+    const { email, userId, firstName } = decodedToken;
     req.userData = {
-      email: decodedToken.email,
-      userId: decodedToken.userId,
-      firstName: decodedToken.firstName,
+      email,
+      userId,
+      firstName,
       expiry: decodedToken.exp
     };
     next();
   } catch (error) {
-    res.status(401).json({
-      message: 'Not authenticated'
+    res.status(402).json({
+      message: 'Not authorized'
     });
   }
 };
