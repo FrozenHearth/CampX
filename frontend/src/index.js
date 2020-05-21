@@ -20,7 +20,7 @@ const rootElement = document.getElementById('root');
 render(
   <Provider store={store}>
     <ReduxToastr
-      timeOut={4000}
+      timeOut={3000}
       newestOnTop={false}
       preventDuplicates
       position="top-right"
