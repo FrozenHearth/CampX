@@ -32,7 +32,6 @@ class AddCampground extends Component {
 
   handleChange = e => {
     const { title, description } = this.state;
-    // Not doing a check for cost, because JS defaults 0 = "" -> i.e 0 to empty string
     if (title !== '' && description !== '') {
       this.setState({
         disableBtn: false
